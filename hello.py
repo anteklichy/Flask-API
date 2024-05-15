@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, render_template
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -56,24 +57,32 @@ def new_reservation():
         user_id = request.form['user_id']
         item_name = request.form['item_name']
         days = int(request.form['days'])
-        start_date = request.form['start_date']
+        start_date_str = request.form['start_date']
+        start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+        end_date = start_date + timedelta(days=days)
 
         item = next((i for i in stock if i["item"] == item_name), None)
-        if item:
-            total_cost = item["price"] * days
-            reservation = {
-                "user_id": user_id,
-                "item_name": item_name,
-                "days": days,
-                "start_date": start_date,
-                "total_cost": total_cost
-            }
-            reservations.append(reservation)
-            print(reservations)
-            return render_template('reservation_summary.html',
-                                   reservation=reservation)
-        else:
+        if not item:
             return "Item not found", 404
+
+        # dostępność i nakładanie się dat
+        for reservation in reservations:
+            if reservation['item_name'] == item_name:
+                existing_start_date = datetime.strptime(reservation['start_date'], '%Y-%m-%d')
+                existing_end_date = existing_start_date + timedelta(days=reservation['days'])
+                if start_date <= existing_end_date and end_date >= existing_start_date:
+                    return "Reservation dates overlap with an existing reservation", 500
+
+        total_cost = item["price"] * days
+        reservation = {
+            "user_id": user_id,
+            "item_name": item_name,
+            "days": days,
+            "start_date": start_date_str,
+            "total_cost": total_cost
+        }
+        reservations.append(reservation)
+        return render_template('reservation_summary.html', reservation=reservation)
     return render_template('new_reservation.html', users=users, stock=stock)
 
 
