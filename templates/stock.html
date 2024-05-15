@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock List</title>
+</head>
+<body>
+    <h1>Stock List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in stock %} <!-- Pętla for, która iteruje po każdym elemencie listy stock. Przesłaliśmy ją jako argument do renderowania! -->
+            <tr> <!-- A więc dla każdego tego elementu, po którym iterujemy robimy sobie tabelkę -->
+                <td>{{ item.item }}</td> <!-- i wyświetlamy sobie kolejne wartości naszego słownika, który znajduje się w liście stock -->
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+            {% endfor %} <!-- Koniec pętli -->
+        </tbody>
+    </table>
+</body>
+</html>

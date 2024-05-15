@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Text</title>
+</head>
+<body>
+    <h1>Enter Text</h1>
+    <form method="POST"> <!-- Formularz, który wysyła dane POSTem do funkcji text_form w hello.py -->
+        <label for="text">Text:</label><br> <!-- Podpis, czego dotyczy poniższe pole tekstowe... -->
+        <input type="text" id="text" name="text"><br><br> <!-- Pole tekstowe, które ma identyfiaktor "text" - po nim odczytujemy go po stronie pythona -->
+        <label for="text2">Text2:</label><br> 
+        <input type="text" id="text2" name="text2"><br><br> <!-- Pole tekstowe, które ma identyfiaktor "text2" - po nim odczytujemy go po stronie pythona -->
+        <input type="submit" value="Submit"> <!-- Przycisk do wysłania formularza -->
+    </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management</title>
+</head>
+<!-- To, co znajduje się w head nie interesuje nas w tym kontekście -->
+<body>
+    <ul>
+        <li><a href="/stock/html">View Stock</a></li>
+        <li><a href="/reservations/new">Make a New Reservation</a></li>
+        <li><a href="/text_form">Enter Text</a></li>
+    </ul>
+    <form action="/reservations" method="POST">
+        <label for="user_id">Enter your User ID to view your reservations:</label>
+        <input type="text" id="user_id" name="user_id">
+        <input type="submit" value="View Reservations">
+    </form> <!-- Hiperłącze do końcówki /stock/html, czyli funkcji render_stock_html w hello.py -->
+</body>
+<!-- Swoją drogą to tak oznaczamy komentarze w HTML. -->
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Reservation</title>
+</head>
+<body>
+    <h1>New Reservation</h1>
+    <form method="POST">
+        <label for="user_id">User ID:</label>
+        <select id="user_id" name="user_id">
+            {% for user in users %}
+            <option value="{{ user.user_id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="item_name">Item to Rent:</label>
+        <select id="item_name" name="item_name">
+            {% for item in stock %}
+            <option value="{{ item.item }}">{{ item.item }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="days">Number of Days:</label>
+        <input type="number" id="days" name="days"><br><br>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
